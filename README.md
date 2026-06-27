@@ -12,7 +12,7 @@ Personal monitoring lab built on Ubuntu Server VM.
 
 ## Environment
 
-- Ubuntu Server
+- Ubuntu Server (26.04)
 - Checkmk Raw
 - NGINX
 - VirtualBox
