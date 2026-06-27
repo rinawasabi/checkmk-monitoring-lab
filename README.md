@@ -1,2 +1,20 @@
-# checkmk-monitoring-lab
-Personal project for Checkmk monitoring.
+# Checkmk Monitoring Lab
+
+Personal monitoring lab built on Ubuntu Server VM.
+
+## Goals
+
+- Learn Checkmk administration
+- Monitor Linux services
+- Monitor NGINX
+- Explore monitoring plugins
+- Practice Linux system administration
+
+## Environment
+
+- Ubuntu Server
+- Checkmk Raw
+- NGINX
+- VirtualBox
+
+This repository is for learning and demonstrating Linux monitoring skills.
