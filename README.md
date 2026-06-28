@@ -18,3 +18,14 @@ Personal monitoring lab built on Ubuntu Server VM.
 - VirtualBox
 
 This repository is for learning and demonstrating Linux monitoring skills.
+
+
+## Example Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/01-dashboard.png)
+
+### Services
+
+![Services](screenshots/03-services.png)
