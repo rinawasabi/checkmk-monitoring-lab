@@ -1,47 +1,39 @@
 # Ubuntu Server Virtual Machine Setup
 
-This environment will later be used to deploy Checkmk and practice Linux server monitoring.
+## Purpose
+
+This document describes the initial setup of an Ubuntu Server virtual machine for a personal Checkmk monitoring lab.
 
 ## Environment
 
-* Host OS: Windows 11
-* Virtualization: Oracle VirtualBox
-* Guest OS: Ubuntu Server 26.04 LTS
+- Host OS: Windows 11
+- Virtualization: Oracle VirtualBox
+- Guest OS: Ubuntu Server 26.04 LTS
 
-## Virtual Machine Configuration
+## Virtual Machine Setup
 
-The Ubuntu Server virtual machine was created using Oracle VirtualBox.
-Initially, the virtual machine used a NAT network adapter to provide internet access during the operating system installation.
-After installing Checkmk, the network adapter was changed to **Bridged Adapter**. 
-This allowed the virtual machine to get its own IP address on the local network, making the Checkmk web interface directly accessible from the host computer.
+An Ubuntu Server virtual machine was created using Oracle VirtualBox. The VM was configured as a lightweight Linux server environment for monitoring practice.
+
+During the initial installation, the VM used NAT networking to access the internet and complete package installation.
+
+## Network Configuration
+
+After the base installation, the network mode was changed from NAT to Bridged Adapter. This made the VM available as a separate device on the local network and allowed access from the Windows host using the VM's local IP address.
 
 ## SSH Access
 
-SSH was enabled to allow remote administration of the Ubuntu server from the Windows host.
-After switching to Bridged Adapter networking, the server became accessible using its local IP address.
-
-Example:
-
+SSH was enabled for remote administration from the Windows host.
 ```bash
-ssh rina@192.168.0.108
+ssh username@<vm-ip-address>
 ```
 
-## Network Verification
+## Verification
 
-The network configuration was verified using:
-
-```bash
+The VM's IP address was checked with:
+```
 hostname -I
 ```
 
-This confirmed that the virtual machine received an IP address from the local network.
-
 ## Result
 
-At the end of this phase, the following tasks had been completed:
-
-* Ubuntu Server virtual machine created
-* Network connectivity configured
-* Bridged Adapter networking enabled
-* SSH remote access verified
-* Linux server ready for monitoring software installation
+The Ubuntu Server VM was successfully created and prepared for Checkmk installation.
