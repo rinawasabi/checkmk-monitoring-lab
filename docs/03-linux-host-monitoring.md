@@ -24,9 +24,7 @@ After service discovery, Checkmk detected several Linux system metrics, such as
 
 ## Memory Threshold Adjustment
 
-Checkmk detected that total virtual memory usage exceeded the default warning threshold.
-
-To reduce unnecessary warnings, I adjusted the memory monitoring rule.
+Checkmk detected that total virtual memory usage exceeded the default warning threshold. To reduce unnecessary warnings, I adjusted the memory monitoring rule.
 
 - Warning: 90%
 - Critical: 95%
@@ -40,10 +38,7 @@ sudo ss -tlnp | grep -E ':80|:5000'
 ```
 
 The result:
-nginx was listening on port 80
-Checkmk Apache was listening on port 5000
-
-This confirmed that the failed apache2 service was caused by a port conflict with nginx.
+nginx was listening on port 80, while Checkmk Apache was listening on port 5000. This confirmed that the failed apache2 service was caused by a port conflict with nginx.
 
 ## Result
 
