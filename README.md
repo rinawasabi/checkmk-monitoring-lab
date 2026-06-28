@@ -6,7 +6,7 @@ Personal monitoring lab built on Ubuntu Server VM.
 
 - Learn Checkmk administration
 - Monitor Linux services
-- Monitor NGINX
+- Monitor nginx
 - Explore monitoring plugins
 - Practice Linux system administration
 
@@ -14,7 +14,7 @@ Personal monitoring lab built on Ubuntu Server VM.
 
 - Ubuntu Server (26.04)
 - Checkmk Raw
-- NGINX
+- nginx
 - VirtualBox
 
 This repository is for learning and demonstrating Linux monitoring skills.
