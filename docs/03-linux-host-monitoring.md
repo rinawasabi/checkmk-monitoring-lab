@@ -43,13 +43,11 @@ nginx was listening on port 80, while Checkmk Apache was listening on port 5000.
 
 ## Checkmk Agent TLS Registration
 
-After the Checkmk Linux agent was installed, the `Check_MK Agent` service showed a warning because TLS was not activated on the monitored host.
-
-This warning was related to the communication between the Checkmk server and the Checkmk agent.
+After the Checkmk Linux agent was installed, the `Check_MK Agent` service showed a warning because TLS was not activated on the monitored host. This warning was related to the communication between the Checkmk server and the Checkmk agent.
 
 To activate Agent TLS, the Agent Controller was registered with the Checkmk site using `cmk-agent-ctl`.
 
-The registration used the following values:
+The registration used the followings:
 
 ```text
 Hostname: ubuntu-monitoring
