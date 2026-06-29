@@ -66,7 +66,7 @@ https://<vm-ip>/monitoring/check_mk/
 
 ### Dashboard
 
-![Dashboard](screenshots/01-dashboard.png)
+![Dashboard](screenshots/01-main-dashboard.png)
 
 ### Services
 
