@@ -3,7 +3,7 @@
 The purpose of this task was to secure access to the Checkmk web interface using HTTPS.
 In this lab environment, Checkmk was running on port `5000`. To provide HTTPS access, the system Apache web server was configured as an HTTPS reverse proxy in front of the Checkmk site Apache.
 
-Since this was a difficult configuration phase, the Checkmk official documentation](https://docs.checkmk.com/latest/en/omd_https.html) was used as the main reference. 
+Since this was a difficult configuration phase, the [Checkmk official documentation](https://docs.checkmk.com/latest/en/omd_https.html) was used as the main reference. 
 ChatGPT was also used to help understand the steps, troubleshoot errors and document the configuration process.
 
 ## Architecture
