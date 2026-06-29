@@ -21,30 +21,46 @@ This repository is for learning and demonstrating Linux monitoring skills.
 
 ## Architecture
 
-```text
+```textArchitecture
 Host Computer
-┌──────────────────────────────┐
-│ Windows 11                   │
-│                              │
-│  Oracle VirtualBox           │
-│  ┌────────────────────────┐  │
-│  │ Ubuntu Server 24.04    │  │
-│  │                        │  │
-│  │  ├── Checkmk server    │  │
-│  │  │     └── Apache (:5000)
-│  │  │
-│  │  ├── Checkmk agent     │
-│  │  │
-│  │  └── nginx (:80)       │
-│  └────────────────────────┘  │
-└──────────────────────────────┘
+┌──────────────────────────────────────────────┐
+│ Windows 11                                   │
+│                                              │
+│  Oracle VirtualBox                           │
+│  ┌────────────────────────────────────────┐  │
+│  │ Ubuntu Server 26.04                    │  │
+│  │                                        │  │
+│  │  ├── System Apache                     │  │
+│  │  │     ├── HTTP  (:80)                 │  │
+│  │  │     └── HTTPS (:443)                │  │
+│  │  │          └── Reverse proxy          │  │
+│  │  │              to Checkmk (:5000)     │  │
+│  │  │                                     │  │
+│  │  ├── Checkmk site Apache (:5000)       │  │
+│  │  │                                     │  │
+│  │  ├── Checkmk Agent                     │  │
+│  │  │                                     │  │
+│  │  └── NGINX (:8081)                     │  │
+│  └────────────────────────────────────────┘  │
+└──────────────────────────────────────────────┘
 
 Browser
       │
+      │ HTTPS
       ▼
-http://<vm-ip>:5000/monitoring/check_mk/
+https://<vm-ip>/monitoring/check_mk/
 ```
 
+## Features
+- Ubuntu Server VM setup
+- Bridged Adapter network configuration
+- SSH access from Windows host
+- Checkmk server installation
+- Linux host monitoring with Checkmk agent
+- Service discovery and monitoring activation
+- NGINX monitoring with a custom Checkmk local check
+- Apache HTTPS reverse proxy configuration
+- HTTPS access to the Checkmk web interface
 
 ## Example Screenshots
 
