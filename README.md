@@ -74,10 +74,9 @@ https://<vm-ip>/monitoring/check_mk/
 
 ![Services](screenshots/03-services.png)
 
-### NGINX Monitoring
+### SSL Certificate Validity Monitoring
 
-![NGINX Monitoring](screenshots/11-nginx-ok.png)
-
+![SSL Certificate Validity Monitoring](screenshots/11-ssl-certificate-validity-ok.png)
 
 ## Troubleshooting Examples
 * Changed VM networking from NAT to Bridged Adapter to make Checkmk access easier from the Windows host.
