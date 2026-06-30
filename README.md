@@ -1,8 +1,6 @@
 # Checkmk Monitoring Lab
 
-Personal monitoring lab built on an Ubuntu Server virtual machine.
-
-This repository documents a local infrastructure monitoring lab using Checkmk, Linux system services, NGINX, Apache reverse proxy, HTTPS, an internal lab CA and Checkmk Agent TLS.
+Personal monitoring lab built on an Ubuntu Server VM. This repository documents a local infrastructure monitoring lab using Checkmk, Linux system services, NGINX, Apache reverse proxy, HTTPS, an internal lab CA and Checkmk Agent TLS.
 
 ## Goals
 
