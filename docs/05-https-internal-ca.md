@@ -219,16 +219,12 @@ After HTTPS access was configured, an active HTTP web service check was added in
 
 The monitored endpoint: `https://<vm-ip-address>/monitoring/check_mk/`
 
-The service name was configured as `Checkmk HTTPS`. Certificate validity monitoring was enabled with fixed threshold levels `Warning below: 40 days & Critical below: 20 days`
+The service name was configured as `Checkmk HTTPS`. Certificate validity monitoring was enabled with fixed threshold levels `Warning below: 40 days & Critical below: 20 days`.
 This allows Checkmk to generate a warning if the certificate expires in less than 40 days, and a critical alert if it expires in less than 20 days.
 
 ### Trusting the Internal CA on Ubuntu
 
-The initial active check failed with an `UnknownIssuer` certificate error:
-
-```text
-invalid peer certificate: UnknownIssuer
-```
+The initial active check failed: `invalid peer certificate: UnknownIssuer`
 
 This happened because the Checkmk server itself did not yet trust the internal lab Root CA. Although the Root CA had already been imported into Windows for browser trust, the Ubuntu server also needed to trust the same Root CA for Checkmk's HTTPS active check.
 
@@ -238,9 +234,7 @@ The lab Root CA certificate was copied to Ubuntu's local certificate trust direc
 sudo cp /etc/certs/checkmk-lab/lab-root-ca.crt /usr/local/share/ca-certificates/checkmk-lab-root-ca.crt
 ```
 
-The system certificate store was then updated: `sudo update-ca-certificates`
-
-After this, the Checkmk site was restarted and Apache was also reloaded.
+The system certificate store was then updated: `sudo update-ca-certificates`. After this, the Checkmk site was restarted and Apache was also reloaded.
 
 
 ### Verification
