@@ -173,14 +173,6 @@ checkmk.lab.local.ext
 checkmk.lab.local.crt
 ```
 
-Important security note:
-
-```text
-lab-root-ca.key and checkmk.lab.local.key are private keys and must not be shared or uploaded to GitHub.
-```
-
-Only documentation and screenshots are included in this repository. Private keys are not included.
-
 ## Apache SSL Configuration
 
 The Apache SSL configuration file was edited:
@@ -199,7 +191,6 @@ SSLCertificateKeyFile   /etc/certs/checkmk-lab/checkmk.lab.local.key
 ## Reverse Proxy Configuration
 
 Apache was configured to forward requests to the Checkmk site running on port `5000`.
-
 Inside the HTTPS VirtualHost, the following configuration was added:
 
 ```apache
@@ -215,42 +206,76 @@ This allows users to access Checkmk through HTTPS while Checkmk itself continues
 
 ## Configuration Test
 
-The Apache configuration was tested with:
+The Apache configuration was tested with `sudo apachectl configtest`. Result = `Syntax OK`, and Apache was then reloaded.
+
+## Browser Trust
+
+Because an internal CA was used, the Root CA certificate had to be imported into the Windows trusted root certificate store. `lab-root-ca.crt` was the imported file.
+After importing the Root CA certificate, the browser could trust certificates issued by the lab CA.
+
+## SSL Certificate Monitoring
+
+After HTTPS access was configured, an active HTTP web service check was added in Checkmk to monitor the HTTPS endpoint and certificate validity.
+
+The monitored endpoint: `https://<vm-ip-address>/monitoring/check_mk/`
+
+The service name was configured as `Checkmk HTTPS`. Certificate validity monitoring was enabled with fixed threshold levels `Warning below: 40 days & Critical below: 20 days`
+This allows Checkmk to generate a warning if the certificate expires in less than 40 days, and a critical alert if it expires in less than 20 days.
+
+### Trusting the Internal CA on Ubuntu
+
+The initial active check failed with an `UnknownIssuer` certificate error:
+
+```text
+invalid peer certificate: UnknownIssuer
+```
+
+This happened because the Checkmk server itself did not yet trust the internal lab Root CA. Although the Root CA had already been imported into Windows for browser trust, the Ubuntu server also needed to trust the same Root CA for Checkmk's HTTPS active check.
+
+The lab Root CA certificate was copied to Ubuntu's local certificate trust directory:
 
 ```bash
-sudo apachectl configtest
+sudo cp /etc/certs/checkmk-lab/lab-root-ca.crt /usr/local/share/ca-certificates/checkmk-lab-root-ca.crt
+```
+
+The system certificate store was then updated: `sudo update-ca-certificates`
+
+After this, the Checkmk site was restarted and Apache was also reloaded.
+
+
+### Verification
+
+The certificate was verified from the Ubuntu server using `curl`:
+
+```bash
+curl -Iv https://<vm-ip-address>/monitoring/check_mk/
+```
+
+The certificate was also verified with OpenSSL:
+
+```bash
+openssl verify \
+-CAfile /usr/local/share/ca-certificates/checkmk-lab-root-ca.crt \
+/etc/certs/checkmk-lab/checkmk.lab.local.crt
 ```
 
 Result:
 
 ```text
-Syntax OK
+/etc/certs/checkmk-lab/checkmk.lab.local.crt: OK
 ```
 
-Apache was then reloaded:
+The Checkmk site user was also used to confirm that the HTTPS endpoint could be verified from the Checkmk runtime environment:
 
 ```bash
-sudo systemctl reload apache2
+sudo omd su monitoring
+curl -Iv https://<vm-ip-address>/monitoring/check_mk/
+exit
 ```
 
-## Browser Trust
+After the active check was rescheduled in Checkmk, the service returned `Status: 200 OK`.
+Checkmk now monitors the HTTPS endpoint of the Checkmk web interface. The active check confirms that the HTTPS service responds successfully and that the certificate validity is monitored.
 
-Because an internal CA was used, the Root CA certificate had to be imported into the Windows trusted root certificate store.
-
-The imported file was:
-
-```text
-lab-root-ca.crt
-```
-
-The private key was not copied.
-
-```text
-Copied to Windows: lab-root-ca.crt
-Not copied: lab-root-ca.key
-```
-
-After importing the Root CA certificate, the browser could trust certificates issued by the lab CA.
 
 ## Result
 
@@ -268,5 +293,7 @@ This configuration demonstrates:
 * Subject Alternative Name usage
 * Reverse proxy configuration
 * Separation of public certificates and private keys
+* Ubuntu system trust store configuration
+* HTTPS endpoint and certificate validity monitoring with Checkmk
 
 This setup was created for a local lab environment. In a production environment, a trusted certificate authority should be used.
