@@ -4,15 +4,12 @@ Personal monitoring lab built on an Ubuntu Server VM. This repository documents 
 
 ## Goals
 
-* Learn Checkmk administration
-* Monitor a Linux server with the Checkmk agent
-* Monitor Linux services and system resource usage
-* Create a custom Checkmk local check for NGINX
-* Configure HTTPS access using Apache reverse proxy
-* Practice internal CA and certificate management
+* Learn Checkmk administration and Linux host monitoring
+* Practice service, resource and custom local check monitoring
+* Configure HTTPS access with Apache reverse proxy and an internal CA
 * Monitor HTTPS endpoint and certificate validity
-* Configure Checkmk Agent TLS registration
-* Practice Linux troubleshooting and service management
+* Configure Checkmk Agent TLS
+* Practice Linux troubleshooting and system administration
 
 ## Environment
 
