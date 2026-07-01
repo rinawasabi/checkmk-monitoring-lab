@@ -79,7 +79,7 @@ https://<vm-ip>/monitoring/check_mk/
 ![SSL Certificate Validity Monitoring](screenshots/11-ssl-certificate-validity-ok.png)
 
 ## Troubleshooting Examples
-* Changed VM networking from NAT to Bridged Adapter to make Checkmk access easier from the Windows host.
+* Changed VM networking from NAT to Bridged Adapter.
 * Resolved an Apache and NGINX port conflict by moving NGINX from port `80` to `8081`.
 * Enabled Apache auto-start after HTTPS access stopped working after VM reboot.
 * Fixed an `UnknownIssuer` error by adding the internal lab Root CA to the Ubuntu trust store.
